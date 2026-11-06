@@ -1,23 +1,19 @@
 const express = require('express');
 const app = express();
 
+
 app.use(express.json());
 
-//Mock db
-let todos = [
-  { id: 1, task: 'Wash dishes' },
-  { id: 2, task: 'Clean bathroom' }
-];
 
 
-//GET
+//GET todos
 app.get('/todos', (req, res) => {
   // res.send('sup world')
   res.status(200).json(todos);
 });
 
 
-//POST
+//POST todos
 app.post('/todos', (req, res) => {
   const newTask = req.body.name;
 
@@ -36,6 +32,17 @@ app.post('/todos', (req, res) => {
   // Respond with the newly created resource and HTTP status 201 (Created)
   res.status(201).json(newTODO);
 });
+
+//GET todos/:id
+app.get('/todos/:id', (req, res) => {
+  //res.status(200).json(todos);
+  res.send(`hello ${req.params.id}`);
+  res.status(200).json(todos);
+});
+
+//POST todos/:id
+
+//DELETE /todos/:id
 
 
 const PORT = process.env.PORT || 6767;
